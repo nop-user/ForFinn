@@ -153,7 +153,7 @@ local options = {
     -- how to enable: keyboard_key = Enum.KeyCode["*"],
 
     -- headshot odds
-    headshot_chance = 75, -- odds for aiming on the head in percentage, 0 = no head (lol) and 100 = always head
+    headshot_chance = 25, -- odds for aiming on the head in percentage, 0 = no head (lol) and 100 = always head
     update_on_refresh_delay = true, -- less nauseating, will recalculate odds every refresh instead of every frame
 
     -- aiming prioritization options
@@ -496,10 +496,9 @@ local function hitting_what(origin_cframe)
 end
 
 local function is_inside_fov(point)
-    local MousePosition = PointMouse.new().ScreenPos
     -- MousePosition = Vector2.new(MousePosition.x, MousePosition.y)
     -- return options.rage_mode or ((point.x - center_screen.X) ^ 2 + (point.y - center_screen.Y) ^ 2 <= aiming.fov_circle_obj.Radius ^ 2)
-    return options.rage_mode or ((point.x - MousePosition.x) ^ 2 + (point.y - MousePosition.y) ^ 2 <= aiming.fov_circle_obj.Radius ^ 2)
+    return options.rage_mode or ((point.x - mouse.x) ^ 2 + (point.y - mouse.y) ^ 2 <= aiming.fov_circle_obj.Radius ^ 2)
 end
 
 local function chanced() -- shanced 2 - 0 gf *tabs*
@@ -620,7 +619,6 @@ local last_tick = 0;
 local function stepped()
     if (tick() - last_tick) > (options.frame_delay / 1000) then
         last_tick = tick()
-        local MousePosition = PointMouse.new().ScreenPos
 
         if refresh_que then -- refresh queed?
             _refresh()
@@ -632,7 +630,7 @@ local function stepped()
             Visible = options.fov_circle,
             Thickness = options.esp_thickness,
             Radius = options.fov + added_fov,
-            Position = Vector2.new(MousePosition.x, MousePosition.y),
+            Position = Vector2.new(mouse.x, mouse.y),
             Color = (options.rainbow and get_rainbow()) or white,
             instance = "Circle";
         })
@@ -830,9 +828,7 @@ local function stepped()
                 if options.looking_at_you then
                     closers_chars[((head.Position + head.CFrame.LookVector * mag) - cam.CFrame.p).Magnitude] = plr_char
                 elseif options.closest_to_center_screen then
-                    local MousePosition = PointMouse.new().ScreenPos
-                    MousePosition = Vector2.new(MousePosition.x, MousePosition.y)
-                    closers_chars[(plr_screen - MousePosition).Magnitude] = plr_char
+                    closers_chars[(plr_screen - Vector2.new(mouse.x, mouse.y)).Magnitude] = plr_char
                 elseif options.closest_to_you then
                     closers_chars[mag] = plr_char
                 end
