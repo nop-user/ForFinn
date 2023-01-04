@@ -106,8 +106,8 @@ local added_fov = 0
 -- execute to apply
 local options = {
     -- global settings
-    frame_delay = 3, -- delay between rendering each frame (in miliseconds)
-    refresh_delay = 0.3, -- delay between refreshing script (in seconds)
+    frame_delay = 10, -- delay between rendering each frame (in miliseconds)
+    refresh_delay = 0.5, -- delay between refreshing script (in seconds)
     max_dist = 400, -- 9e9 = very big
     team_check = true,
     wall_check = true,
@@ -121,7 +121,7 @@ local options = {
 
     -- aimbot settings
     aimbot = true,
-    smoothness = 6,
+    smoothness = 3,
     fov = 100,
     fov_increase_on_aim = 0, -- increases your fov by this value while the aimbot is active
     rage_mode = false, -- disregards fov, smoothness, odds and will lock onto people behind you
@@ -165,17 +165,17 @@ local options = {
     backwards_iteration = false,
 
     -- global esp settings
-    esp = false,
+    esp = true,
     esp_thickness = 1,
     
     -- esp settings
     tracers = false,
-    box = false,
+    box = true,
 
     -- overhead esp settings
     overhead = false, -- disables name health and distance entirely
-    name = true,
-    distance = true,
+    name = false,
+    distance = false,
     health = true,
     outline = true, -- text outline, laggier
 
@@ -192,7 +192,7 @@ local options = {
     lat_length = 500, -- how far the tracer will go (in studs)
     
     -- crosshair settings
-    crosshair = false,
+    crosshair = true,
 
     crosshair_distance = 4,
     crosshair_thickness = 1,
