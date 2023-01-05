@@ -104,7 +104,7 @@ local aim_head = false
 local added_fov = 0
 
 -- execute to apply
-local options = {
+options = {
     -- global settings
     frame_delay = 10, -- delay between rendering each frame (in miliseconds)
     refresh_delay = 0.5, -- delay between refreshing script (in seconds)
